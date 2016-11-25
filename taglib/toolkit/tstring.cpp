@@ -548,7 +548,10 @@ String String::stripWhiteSpace() const
   } while(*end == '\t' || *end == '\n' ||
           *end == '\f' || *end == '\r' || *end == ' ');
 
-  return String(wstring(begin, end + 1));
+  if(begin == d->data.begin() && (end + 1) == d->data.end())
+    return *this;
+  else
+    return String(wstring(begin, end + 1));
 }
 
 bool String::isLatin1() const
